@@ -12,6 +12,7 @@
     --color-blue-500: oklch(62.3% 0.214 259.815);
     --color-blue-950: oklch(28.2% 0.091 267.935);
     --color-slate-800: oklch(27.9% 0.041 260.031);
+    --color-gray-600: oklch(44.6% 0.03 256.802);
     --color-neutral-800: oklch(26.9% 0 0);
     --color-white: #fff;
     --spacing: 0.25rem;
@@ -1343,6 +1344,12 @@
   .mb-5 {
     margin-bottom: calc(var(--spacing) * 5);
   }
+  .ml-5 {
+    margin-left: calc(var(--spacing) * 5);
+  }
+  .ml-10 {
+    margin-left: calc(var(--spacing) * 10);
+  }
   .ml-auto {
     margin-left: auto;
   }
@@ -1651,6 +1658,13 @@
     @layer daisyui.l1.l2.l3 {
       --btn-color: var(--color-info);
       --btn-fg: var(--color-info-content);
+    }
+  }
+  .hover\:bg-gray-600 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-gray-600);
+      }
     }
   }
 }
