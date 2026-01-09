@@ -5,6 +5,7 @@ let elLoader = document.getElementById("loader");
 let elDelete = document.getElementById("deleteCard");
 let elPrev = document.getElementById("prev");
 let elNext = document.getElementById("next");
+let elPagenation = document.getElementById("pagenation");
 
 let limit = 9;
 let skip = 0;
@@ -36,10 +37,11 @@ function loader(boolean) {
   }
 }
 function ui(data) {
-  if (skip===0) {
-    elPrev.style.display="none"
-  }else if(skip!=0){
-     elPrev.style.display="inline-block"
+  elPagenation.style.display = "flex";
+  if (skip === 0) {
+    elPrev.style.display = "none";
+  } else if (skip != 0) {
+    elPrev.style.display = "inline-block";
   }
   elContainer.innerHTML = "";
   data.forEach((element) => {
@@ -70,15 +72,13 @@ elContainer.addEventListener("click", (evt) => {
 });
 
 elNext.addEventListener("click", (evt) => {
-
   skip = skip + limit;
- 
-  req()
+
+  req();
 });
 elPrev.addEventListener("click", (evt) => {
-
   skip = skip - limit;
-  
- req()
+
+  req();
 });
-req()
+req();
