@@ -13,63 +13,110 @@
     <link rel="stylesheet" href="src/output.css" />
   </head>
   <body>
-    <div class="grid grid-cols-3 gap-10" id="container"></div>
+    <!-- Navbar -->
+    <div
+      class="navbar bg-base-100 shadow-2xl mt-4 w-300 m-w-300 ml-auto mr-auto"
+    >
+      <a class="btn btn-ghost text-xl">Cars Information</a>
+    </div>
+
+    <!-- Container  -->
+    <div
+      class="grid grid-cols-3 gap-6 w-275 m-w-275 ml-auto mr-auto justify-center items-center"
+      id="container"
+    ></div>
+
+    <!-- Loader -->
     <div class="grid grid-cols-3 gap-10" id="loader"></div>
+
+    <!-- Template fragment -->
     <template id="templateCard">
-      <div class="card bg-base-100 shadow-sm ">
-        <figure>
+      <div
+        class="card bg-base-100 shadow-sm w-62.5 m-w-62.5 mr-auto ml-auto mt-10"
+      >
+        <!-- <figure>
           <img
             src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
             alt="Shoes"
           />
-        </figure>
+        </figure> -->
+
         <div class="card-body">
           <h2 class="card-title"></h2>
           <p></p>
+          <p id="generation"></p>
+          <p id="year"></p>
           <div class="card-actions justify-end">
-            <div class="tooltip" data-tip="Delete">
-              <button
-                class="btn btn-error js-delete-button"
-                
-              >
-                <svg
-                  class="text-white pointer-events-none"
-                  width="15"
-                  height="15"
-                  viewBox="0 0 15 15"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
+            <div class="flex gap-4">
+              <div class="tooltip flex" data-tip="More information">
+                <a href="./information.html"
+                  ><button class="text-white bg-blue-400 p-2 rounded-md h-10 cursor-pointer">
+                    More
+                  </button></a
                 >
-                  <path
-                    d="M5.5 1C5.22386 1 5 1.22386 5 1.5C5 1.77614 5.22386 2 5.5 2H9.5C9.77614 2 10 1.77614 10 1.5C10 1.22386 9.77614 1 9.5 1H5.5ZM3 3.5C3 3.22386 3.22386 3 3.5 3H5H10H11.5C11.7761 3 12 3.22386 12 3.5C12 3.77614 11.7761 4 11.5 4H11V12C11 12.5523 10.5523 13 10 13H5C4.44772 13 4 12.5523 4 12V4L3.5 4C3.22386 4 3 3.77614 3 3.5ZM5 4H10V12H5V4Z"
-                    fill="currentColor"
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                  ></path>
-                </svg>
-              </button>
+              </div>
+              <div class="tooltip flex" data-tip="Delete">
+                <button class="btn btn-error js-delete-button" id="delBtn">
+                  <svg
+                    class="text-white pointer-events-none"
+                    width="15"
+                    height="15"
+                    viewBox="0 0 15 15"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M5.5 1C5.22386 1 5 1.22386 5 1.5C5 1.77614 5.22386 2 5.5 2H9.5C9.77614 2 10 1.77614 10 1.5C10 1.22386 9.77614 1 9.5 1H5.5ZM3 3.5C3 3.22386 3.22386 3 3.5 3H5H10H11.5C11.7761 3 12 3.22386 12 3.5C12 3.77614 11.7761 4 11.5 4H11V12C11 12.5523 10.5523 13 10 13H5C4.44772 13 4 12.5523 4 12V4L3.5 4C3.22386 4 3 3.77614 3 3.5ZM5 4H10V12H5V4Z"
+                      fill="currentColor"
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </template>
+
+    <!-- skeleton -->
     <template id="templateSkeleton">
-      <div class="card bg-base-100 shadow-sm">
-        <figure>
+      <div
+        class="card bg-base-100 shadow-sm w-62.5 m-w-62.5 mr-auto ml-auto mt-10"
+      >
+        <!-- <figure>
           <div class="skeleton h-40 w-55.5"></div>
-        </figure>
+        </figure> -->
         <div class="card-body">
-          <div class="skeleton h-6.5 w-full"></div>
-          <div class="flex gap-2">
-            <div class="skeleton h-5 w-40"></div>
-            <div class="skeleton h-5 w-40"></div>
+          <div class="skeleton h-6.5 w-50.5"></div>
+          <div class="flex flex-col gap-2">
+            <div class="skeleton h-5 w-5"></div>
+            <div class="skeleton h-5 w-10"></div>
+            <div class="skeleton h-5 w-10"></div>
           </div>
           <div class="card-actions justify-end">
-            <div class="skeleton h-10 w-23"></div>
+            <div class="skeleton h-10 w-12"></div>
+            <div class="skeleton h-10 w-12"></div>
           </div>
         </div>
       </div>
     </template>
+    <!-- buttons Prev & Next -->
+    <div class="flex gap-10 pl-4 pt-4 justify-center mt-5 mb-5">
+      <div class="tooltip flex" data-tip="back ">
+
+        <button class="btn-info bg-blue-500 p-2 pr-4 pl-4 rounded-md cursor-pointer hidden" id="prev">
+          <span>👈</span>Prev
+        </button>
+      </div>
+      <div class="tooltip flex" data-tip="next page">
+
+        <button class="btn-info bg-blue-500 p-2 pr-4 pl-4 rounded-md cursor-pointer" id="next">
+          Next <span>👉</span>
+        </button>
+      </div>
+    </div>
     <script src="./app.js"></script>
   </body>
 </html>
