@@ -55,7 +55,7 @@ function ui(data) {
     clone.getElementById("generation").innerText = element.generation;
     clone.getElementById("year").innerText = element.year;
     clone.querySelector("#delBtn").id = element.id;
-
+    clone.querySelector(".js-data-link").href=location.origin+"/information.html?id="+element.id
     elContainer.appendChild(clone);
   });
 }
