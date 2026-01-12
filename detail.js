@@ -9,9 +9,7 @@ fetch(
   .then((res) => res.json())
   .then((res) => ui(res))
   .catch(() => {})
-  .finally(() => {
-    loader(false);
-  });
+  .finally(() => {});
 function ui(data) {
   let clone = document.querySelector("#ui_template").cloneNode(true).content;
   clone.querySelector(".js-data-name").innerText = data.name;
@@ -30,14 +28,4 @@ function ui(data) {
   clone.querySelector(".fuelType").innerText = data.fuelType;
 
   document.querySelector(".js-details-box").append(clone);
-}
-
-function loader(boolean) {
-  elLoaderSkeleton.innerHTML = null;
-
-  if (boolean) {
-    Array.from({ length: 1 }, (_, index) => index).forEach(() => {
-      elLoaderSkeleton.appendChild(elSkeleton.cloneNode(true).content);
-    });
-  }
 }
