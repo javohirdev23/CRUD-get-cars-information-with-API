@@ -1,7 +1,6 @@
 let elLoaderSkeleton = document.getElementById("loaderSkeleton");
 let elSkeleton = document.getElementById("skeleton");
 
-let = loader(true);
 fetch(
   "https://json-api.uz/api/project/fn44-amaliyot/cars/" +
     new URLSearchParams(location.search).get("id")
@@ -15,7 +14,7 @@ function ui(data) {
   clone.querySelector(".js-data-name").innerText = data.name;
   clone.querySelector(".trim").innerText = data.trim;
   clone.querySelector(".generation").innerText = data.generation;
-  // clone.querySelector(".year").innerText = data.year;
+  clone.querySelector(".year").innerText = Number.parseInt(data.year);
 
   clone.querySelector(".colorName").innerText = data.colorName;
   clone.querySelector(".category").innerText = data.category;
