@@ -12,17 +12,23 @@
     <title>CRUD</title>
     <link rel="stylesheet" href="src/output.css" />
   </head>
-  <body>
+  <body class="overflow-x-hidden" >
     <!-- Navbar -->
     <div
-      class="navbar bg-base-100 shadow-2xl mt-4 w-300 m-w-300 ml-auto mr-auto"
+      class="navbar bg-base-100 shadow-2xl mt-4 w-full mx-auto flex justify-between pr-4"
     >
       <a class="btn btn-ghost text-xl">Cars Information</a>
+      <!-- You can open the modal using ID.showModal() method -->
+      <div class="flex justify-end">
+        <button class="btn btn-info" onclick="my_modal_3.showModal()">
+          +Add
+        </button>
+      </div>
     </div>
 
     <!-- Container  -->
     <div
-      class="grid grid-cols-3 gap-6 w-275 m-w-275 ml-auto mr-auto justify-center items-center"
+      class="grid grid-cols-3 gap-6 w-full mx-auto justify-center items-center"
       id="container"
     ></div>
 
@@ -32,7 +38,7 @@
     <!-- Template fragment -->
     <template id="templateCard">
       <div
-        class="card bg-base-100 shadow-sm w-62.5 m-w-62.5 mr-auto ml-auto mt-10 hover:shadow-stone-700"
+        class="card bg-base-100 shadow-sm w-full mx-auto mt-10 hover:shadow-stone-700"
       >
         <!-- <figure>
           <img
@@ -97,6 +103,15 @@
         </div>
       </div>
     </template>
+
+    <!-- Toast -->
+
+    <template id="toastTemplate">
+      <div role="alert" class="alert alert-error alert-soft z-10!">
+        <span>Error! Task failed successfully.</span>
+      </div>
+    </template>
+    <div class="fixed top-5 right-5 flex flex-col gap-2 z-10! " id="toast"></div>
     <!-- buttons Prev & Next -->
     <div
       class="gap-10 pl-4 pt-4 justify-center mt-5 mb-5 hidden"
@@ -119,6 +134,125 @@
         </button>
       </div>
     </div>
+
+    <!-- +add Modal -->
+    <dialog id="my_modal_3" class="modal">
+      <div class="modal-box">
+        <form method="dialog">
+          <button
+            class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+          >
+            ✕
+          </button>
+        </form>
+        <h3 class="text-lg font-bold">Yangi mashina qo'shish</h3>
+        <p class="py-4">Mashina haqidagi malumotlarni kiriting!</p>
+        <form class="flex flex-col gap-y-2" id="carAddForm">
+          <input
+            type="text"
+            placeholder="Mashina nomini kiriting"
+            class="input"
+            id="js-car-name"
+            name="name"
+          />
+          <input
+            type="number"
+            max="2030"
+            min="1990"
+            placeholder="Mashina chiqarilgan yilini kiriting"
+            class="input"
+            id="js-car-year"
+            name="year"
+          />
+          <div class="flex gap-1">
+            <h3>Rang:</h3>
+            <input
+              type="color"
+              placeholder="Mashina rangini kiriting "
+              id="js-car-color"
+              name="color"
+            />
+          </div>
+          <label class="input">
+            <input
+              type="number"
+              placeholder="Mashina tezligini kiriting"
+              id="js-car-speed"
+              name="maxSpeed"
+            />
+            km/s
+          </label>
+          <input
+            type="number"
+            max="1500"
+            min="40"
+            placeholder="Mashina ot kuchi"
+            class="input"
+            id="js-car-horsePower"
+            name="horsepower"
+          />
+          <input
+            type="text"
+            placeholder="Mashina avlodini kiriting"
+            class="input"
+            id="js-car-generation"
+            name="generation"
+          />
+          <input
+            type="text"
+            placeholder="Mashina kategoryasini kiriting (turi)"
+            class="input"
+            id="js-car-category"
+            name="category"
+          />
+          <input
+            type="number"
+            placeholder="Mashinadagi eshiklar sonini kiriting"
+            class="input"
+            id="js-car-doorCount"
+            name="doorCount"
+          />
+          <input
+            type="number"
+            placeholder="Mashinadagi orindiqlar sonini kiriting"
+            class="input"
+            id="js-car-seatCount"
+            name="seatCount"
+          />
+          <input
+            type="number"
+            placeholder="Mashina  tezligi 0-100 ?sek"
+            class="input"
+            id="js-car-acceleration"
+            name="acceleration"
+          />
+          <input
+            type="text"
+            placeholder="Yoqilgi turini kiriting "
+            class="input"
+            id="js-car-fuelType"
+            name="fuelType"
+          />
+          <input
+            type="text"
+            placeholder="Mashina ishlab chiqarilgan davlat "
+            class="input"
+            id="js-car-country"
+            name="country"
+          />
+          <textarea
+            placeholder="Mashina haqida qisqacha ta'rif"
+            class="w-full pl-3 hover:border-s-gray-400"
+            id="js-car-description"
+            name="description"
+          ></textarea>
+          <button value="submit" class="w-full btn mt-2" id="addSubmit">
+            Tasdiqlash
+          </button>
+        </form>
+      </div>
+    </dialog>
+
     <script src="./app.js"></script>
   </body>
 </html>
