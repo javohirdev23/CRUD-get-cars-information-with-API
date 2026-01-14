@@ -103,17 +103,24 @@ elPrev.addEventListener("click", (evt) => {
 });
 req();
 
+
 elCarAddForm.addEventListener("submit", (evt) => {
   evt.preventDefault();
   const formData = new FormData(elCarAddForm);
   let result = {};
+
   formData.forEach((value, key) => {
     result[key] = value;
-    console.log(result);
   });
 
   for (let key in result) {
     if (result[key] == "") {
+        elCarAddForm.childNodes.forEach((el) => {
+          if(el.classList != undefined && el.getAttribute("name") == key){
+            el.focus()
+          }
+
+      })
       const clone = elToastTemplate.cloneNode(true).content;
       clone.querySelector("span").innerText = ` ${key} joyni to'ldiring`;
       elToast.appendChild(clone);
