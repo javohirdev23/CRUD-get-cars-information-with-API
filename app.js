@@ -109,12 +109,19 @@ elCarAddForm.addEventListener("submit", (evt) => {
   let result = {};
   formData.forEach((value, key) => {
     result[key] = value;
-    result.value=""
+    console.log(result);
   });
-  if (result.value === "") {
-    const clone = elToastTemplate.cloneNode(true).content;
-    clone.querySelector("span").innerText = "Bo'sh joyni to'ldiring";
-    elToast.appendChild(clone);
+
+  for (let key in result) {
+    if (result[key] == "") {
+      const clone = elToastTemplate.cloneNode(true).content;
+      clone.querySelector("span").innerText = ` ${key} joyni to'ldiring`;
+      elToast.appendChild(clone);
+
+      setTimeout(() => {
+        document.querySelector(`[role="alert"]`).remove();
+      }, 1000);
+      return;
+    }
   }
-  console.log(result);
 });

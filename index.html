@@ -12,7 +12,7 @@
     <title>CRUD</title>
     <link rel="stylesheet" href="src/output.css" />
   </head>
-  <body class="overflow-x-hidden" >
+  <body class="overflow-x-hidden">
     <!-- Navbar -->
     <div
       class="navbar bg-base-100 shadow-2xl mt-4 w-full mx-auto flex justify-between pr-4"
@@ -38,7 +38,7 @@
     <!-- Template fragment -->
     <template id="templateCard">
       <div
-        class="card bg-base-100 shadow-sm w-full mx-auto mt-10 hover:shadow-stone-700"
+        class="card bg-base-100 shadow-sm w-62.5 m-w-62.5 mx-auto mt-10 hover:shadow-stone-700"
       >
         <!-- <figure>
           <img
@@ -107,11 +107,14 @@
     <!-- Toast -->
 
     <template id="toastTemplate">
-      <div role="alert" class="alert alert-error alert-soft z-10!">
+      <div  role="alert" class="alert alert-error alert-soft ">
         <span>Error! Task failed successfully.</span>
       </div>
     </template>
-    <div class="fixed top-5 right-5 flex flex-col gap-2 z-10! " id="toast"></div>
+    <div
+      class="fixed top-5 right-5 flex flex-col gap-2 "
+      id="toast"
+    ></div>
     <!-- buttons Prev & Next -->
     <div
       class="gap-10 pl-4 pt-4 justify-center mt-5 mb-5 hidden"
@@ -136,7 +139,7 @@
     </div>
 
     <!-- +add Modal -->
-    <dialog id="my_modal_3" class="modal">
+    <dialog  id="my_modal_3" class="modal">
       <div class="modal-box">
         <form method="dialog">
           <button
@@ -176,7 +179,8 @@
           <label class="input">
             <input
               type="number"
-              placeholder="Mashina tezligini kiriting"
+              min="80"
+              placeholder="Mashina max tezligini kiriting"
               id="js-car-speed"
               name="maxSpeed"
             />
@@ -186,7 +190,7 @@
             type="number"
             max="1500"
             min="40"
-            placeholder="Mashina ot kuchi"
+            placeholder="Mashinadagi ot kuchi"
             class="input"
             id="js-car-horsePower"
             name="horsepower"
@@ -200,13 +204,17 @@
           />
           <input
             type="text"
-            placeholder="Mashina kategoryasini kiriting (turi)"
+            placeholder="Mashina modelini kiriting"
             class="input"
             id="js-car-category"
             name="category"
           />
+        
+        
           <input
             type="number"
+            max="6"
+            min="2"
             placeholder="Mashinadagi eshiklar sonini kiriting"
             class="input"
             id="js-car-doorCount"
@@ -214,6 +222,8 @@
           />
           <input
             type="number"
+            max="10"
+            min="2"
             placeholder="Mashinadagi orindiqlar sonini kiriting"
             class="input"
             id="js-car-seatCount"
@@ -221,6 +231,8 @@
           />
           <input
             type="number"
+            max="20"
+            min="2"
             placeholder="Mashina  tezligi 0-100 ?sek"
             class="input"
             id="js-car-acceleration"
