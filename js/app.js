@@ -114,19 +114,39 @@ function getById(id) {
     })
     .then((res) => {
       elCarEditModal.showModal();
-      elCarEditForm.name.defaultValue = res.name;
-      elCarEditForm.year.defaultValue = res.year;
-      elCarEditForm.color.defaultValue = res.color;
-      elCarEditForm.maxSpeed.defaultValue = res.maxSpeed;
-      elCarEditForm.horsepower.defaultValue = res.horsepower;
-      elCarEditForm.generation.defaultValue = res.generation;
-      elCarEditForm.category.defaultValue = res.category;
-      elCarEditForm.doorCount.defaultValue = res.doorCount;
-      elCarEditForm.seatCount.defaultValue = res.seatCount;
-      elCarEditForm.acceleration.defaultValue = res.acceleration;
-      elCarEditForm.fuelType.defaultValue = res.fuelType;
-      elCarEditForm.country.defaultValue = res.country;
-      elCarEditForm.description.defaultValue = res.description;
+      elCarEditForm.name.defaultValue = res.name ? res.name : "no data";
+      elCarEditForm.year.defaultValue = res.year ? res.year : "no data";
+      elCarEditForm.color.defaultValue = res.color ? res.color : "no data";
+      elCarEditForm.maxSpeed.defaultValue = res.maxSpeed
+        ? res.maxSpeed
+        : "no data";
+      elCarEditForm.horsepower.defaultValue = res.horsepower
+        ? res.horsepower
+        : "no data";
+      elCarEditForm.generation.defaultValue = res.generation
+        ? res.generation
+        : "no data";
+      elCarEditForm.category.defaultValue = res.category
+        ? res.category
+        : "no data";
+      elCarEditForm.doorCount.defaultValue = res.doorCount
+        ? res.doorCount
+        : "no data";
+      elCarEditForm.seatCount.defaultValue = res.seatCount
+        ? res.seatCount
+        : "no data";
+      elCarEditForm.acceleration.defaultValue = res.acceleration
+        ? res.acceleration
+        : "no data";
+      elCarEditForm.fuelType.defaultValue = res.fuelType
+        ? res.fuelType
+        : "no data";
+      elCarEditForm.country.defaultValue = res.country
+        ? res.country
+        : "no data";
+      elCarEditForm.description.defaultValue = res.description
+        ? res.description
+        : "no data";
     })
     .catch((res) => {})
     .finally(() => {});
@@ -194,37 +214,37 @@ function add(data) {
     .finally(() => {});
 }
 
-// document.getElementById("carEditForm").addEventListener("submit", (evt) => {
-//   evt.preventDefault();
+document.getElementById("carEditForm").addEventListener("submit", (evt) => {
+  evt.preventDefault();
 
-//   let x = [];
+  let x = [];
 
-//   document
-//     .getElementById("carEditForm")
-//     .querySelectorAll("input, textarea")
-//     .forEach((el) => {
-//       if (el.value.trim() == "") {
-//         x.push(el.name);
-//       }
-//     });
-//   console.log(x);
+  document
+    .getElementById("carEditForm")
+    .querySelectorAll("input, textarea")
+    .forEach((el) => {
+      if (el.value.trim() == "") {
+        x.push(el.name);
+      }
+    });
+  console.log(x);
 
-//   if (x.length == 0) {
-//     let formData = new FormData(document.getElementById("carEditForm"));
-//     const reqObj = {
-//       name: formData.get("name"),
-//     };
-//     fetch("https://json-api.uz/api/project/fn44-amaliyot/cars/" + id, {
-//       method: "PATCH",
-//       headers: {
-//         "Content-Type": "applicaton/json",
-//       },
-//       body: JSON.stringify(reqObj),
-//     }).then((res) => {
-//       if (res.ok) {
-//         alert("Car succesfuly edited");
-//         req();
-//       }
-//     });
-//   }
-// });
+  if (x.length == 0) {
+    let formData = new FormData(document.getElementById("carEditForm"));
+    const reqObj = {
+      name: formData.get("name"),
+    };
+    fetch("https://json-api.uz/api/project/fn44-amaliyot/cars/" + id, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "applicaton/json",
+      },
+      body: JSON.stringify(reqObj),
+    }).then((res) => {
+      if (res.ok) {
+        alert("Car succesfuly edited");
+        req();
+      }
+    });
+  }
+});

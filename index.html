@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <link
       rel="icon"
@@ -18,11 +18,16 @@
       class="navbar bg-base-100 shadow-2xl mt-4 w-full mx-auto flex justify-between pr-4"
     >
       <a class="btn btn-ghost text-xl">Cars Information</a>
-
-      <div class="flex justify-end">
-        <button class="btn btn-info" onclick="my_modal_3.showModal()">
-          +Add
-        </button>
+      <div class="flex gap-3">
+        <div class="flex justify-end">
+          <button class="btn btn-info" onclick="my_modal_3.showModal()">
+            +Add
+          </button>
+        </div>
+        <div class="flex justify-end">
+          <button class="btn dark__mode">🌙&nbsp;Dark</button>
+          <button class="btn hidden light__mode">☀️&nbsp;Light</button>
+        </div>
       </div>
     </div>
 
