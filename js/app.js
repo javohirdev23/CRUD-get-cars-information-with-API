@@ -43,6 +43,7 @@ function loader(boolean) {
   }
 }
 function ui(data, clr) {
+  // [{}]
   elPagenation.style.display = "flex";
   if (skip === 0) {
     elPrev.style.display = "none";
@@ -108,7 +109,7 @@ function deleteCard(id) {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-      Authorization: "bearer " + token,
+      Authorization: "Bearer " + token,
     },
   })
     .then((res) => {
@@ -183,11 +184,13 @@ req();
 elCarAddForm.addEventListener("submit", (evt) => {
   evt.preventDefault();
   const formData = new FormData(elCarAddForm);
+
   let result = {};
 
   formData.forEach((value, key) => {
     result[key] = value;
   });
+  result.maxSpeed = 19;
 
   for (let key in result) {
     if (result[key] == "") {
@@ -206,25 +209,30 @@ elCarAddForm.addEventListener("submit", (evt) => {
       return;
     }
   }
-  add(result);
+  add(result); // { maxSpeed:200 , age:19 }
 });
 
 // Post
 function add(data) {
+  // { maxSpeed:200 , age:19 }
   fetch("https://json-api.uz/api/project/fn44-amaliyot/cars", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
+    body: JSON.stringify(data), // { "maxSpeed":200 , "age":19 }
   })
     .then((res) => {
       return res.json();
     })
     .then((res) => {
+      // { "maxSpeed":200 , "age":19 }
+
       elCarAddForm.reset();
-      ui([res], false);
+      ui([res], false); // [ { "maxSpeed":200 , "age":19 }] false
       document.getElementById("my_modal_3").close();
     })
-    .catch(() => {})
+    .catch((err) => {
+      alert(err);
+    })
     .finally(() => {});
 }
 
