@@ -20,7 +20,7 @@
       <a class="btn btn-ghost text-xl">Cars Information</a>
       <div class="flex gap-3">
         <div class="flex justify-end">
-          <button class="btn btn-info" onclick="my_modal_3.showModal()">
+          <button class="btn btn-info js-add-button" >
             +Add
           </button>
         </div>
@@ -175,7 +175,7 @@
     </div>
 
     <!-- +add Modal -->
-    <dialog id="my_modal_3" class="modal">
+    <dialog id="editModal" class="modal">
       <div
         class="modal-box h-70 flex flex-col overflow-y-scroll sm:h-120 md:h-120 mx-auto"
       >
@@ -428,7 +428,7 @@
         </form>
       </div>
     </dialog>
-    <script src="./js/mode.js"></script>
-    <script src="./js/app.js"></script>
+    <script type="module" src="./js/mode.js"></script>
+    <script type="module" src="./js/app.js"></script>
   </body>
 </html>

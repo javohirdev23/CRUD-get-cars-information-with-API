@@ -12,10 +12,12 @@ let elToast = document.getElementById("toast");
 let elCarAddForm = document.getElementById("carAddForm");
 let elCarEditForm = document.getElementById("carEditForm");
 let elCarEditModal = document.getElementById("editModal");
+let elAddButton = document.querySelector(".js-add-button");
 
+let editId = null;
 let limit = 6;
 let skip = 0;
-let = loader(true);
+loader(true);
 function req() {
   fetch(
     `https://json-api.uz/api/project/fn44-amaliyot/cars?limit=${limit}&skip=${skip}`
@@ -32,7 +34,7 @@ function req() {
     });
 }
 function loader(boolean) {
-  elLoader.innerHTML = null;
+  elLoader.innerHTML = "";
 
   if (boolean) {
     Array.from({ length: 6 }, (_, index) => index).forEach(() => {
@@ -214,37 +216,31 @@ function add(data) {
     .finally(() => {});
 }
 
-document.getElementById("carEditForm").addEventListener("submit", (evt) => {
+// editForm
+elCarEditForm.addEventListener("submit", (evt) => {
   evt.preventDefault();
+  const formData = new FormData(elCarEditForm);
+  const data = {};
+  formData.forEach((value, key) => {
+    data[key] = value;
+  });
+});
 
-  let x = [];
+function isLogin() {
+  if (localStorage.getItem("token") === null) {
+    return false;
+  } else {
+    return true;
+  }
+}
 
-  document
-    .getElementById("carEditForm")
-    .querySelectorAll("input, textarea")
-    .forEach((el) => {
-      if (el.value.trim() == "") {
-        x.push(el.name);
-      }
-    });
-  console.log(x);
+// check func
+elAddButton.addEventListener("click", () => {
+  const check = isLogin();
 
-  if (x.length == 0) {
-    let formData = new FormData(document.getElementById("carEditForm"));
-    const reqObj = {
-      name: formData.get("name"),
-    };
-    fetch("https://json-api.uz/api/project/fn44-amaliyot/cars/" + id, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "applicaton/json",
-      },
-      body: JSON.stringify(reqObj),
-    }).then((res) => {
-      if (res.ok) {
-        alert("Car succesfuly edited");
-        req();
-      }
-    });
+  if (check) {
+    document.getElementById("my_modal_3").showModal();
+  } else {
+    location.href = "./login.html";
   }
 });
