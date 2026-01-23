@@ -17,8 +17,8 @@ let elAddButton = document.querySelector(".js-add-button");
 let editId = null;
 let limit = 6;
 let skip = 0;
-loader(true);
 function req() {
+  loader(true);
   fetch(
     `https://json-api.uz/api/project/fn44-amaliyot/cars?limit=${limit}&skip=${skip}`,
   )
@@ -35,8 +35,8 @@ function req() {
 }
 function loader(boolean) {
   elLoader.innerHTML = "";
-
   if (boolean) {
+    elContainer.innerHTML = "";
     Array.from({ length: 6 }, (_, index) => index).forEach(() => {
       elLoader.appendChild(elTemlateSkeleton.cloneNode(true).content);
     });
@@ -123,6 +123,7 @@ function deleteCard(id) {
 }
 // Edit
 function getById(id) {
+  document.querySelector("#editSubmit").setAttribute("data-edit-id", id);
   fetch(`https://json-api.uz/api/project/fn44-amaliyot/cars/${id}`)
     .then((res) => {
       return res.json();
@@ -163,8 +164,9 @@ function getById(id) {
         ? res.description
         : "no data";
     })
-    .catch((res) => {})
+    .catch(() => {})
     .finally(() => {});
+  return id;
 }
 // pagenation
 elNext.addEventListener("click", (evt) => {
@@ -237,14 +239,8 @@ function add(data) {
 }
 
 // editForm
-elCarEditForm.addEventListener("submit", (evt) => {
-  evt.preventDefault();
-  const formData = new FormData(elCarEditForm);
-  const data = {};
-  formData.forEach((value, key) => {
-    data[key] = value;
-  });
-});
+
+function editUI() {}
 
 function isLogin() {
   if (localStorage.getItem("token") === null) {
@@ -262,5 +258,47 @@ elAddButton.addEventListener("click", () => {
     document.getElementById("addModal").showModal();
   } else {
     location.href = "./login.html";
+  }
+});
+
+document.querySelector("#carEditForm").addEventListener("submit", (evt) => {
+  evt.preventDefault();
+  let x = [];
+  let id = document.querySelector("#editSubmit").getAttribute("data-edit-id");
+  document
+    .querySelector("#carEditForm")
+    .querySelectorAll("input,textarea")
+    .forEach((el) => {
+      if (el.value.trim() == "") x.push(el.name);
+    });
+  if (x.length != 0) {
+    alert(`Iltimos ${x[0]}-ni to'ldiring`);
+  } else {
+    let editFormFullData = new FormData(document.querySelector("#carEditForm"));
+    let requestObj = {};
+    editFormFullData.forEach((val, key) => {
+      requestObj[key] = val;
+    });
+    fetch(`https://json-api.uz/api/project/fn44-amaliyot/cars/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify(requestObj),
+    })
+      .then((res) => res.text())
+      .then((res) => {
+        if (res == "Token expired!") {
+          window.location.href = window.origin + "/login.html";
+        } else {
+          editModal.close();
+          req();
+        }
+      })
+      .catch(() => {})
+      .finally(() => {
+        alert("car successfuly edited!");
+      });
   }
 });
